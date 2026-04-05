@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <title>ARCHIVES DU HASARD : MANUSCRIT COMPLET</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=JetBrains+Mono:wght@300;500;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <meta name="description" content="Archive du Hasard : une expérience interactive sur les paradoxes mathématiques et la logique.">
-    <meta name="keywords" content="hasard, probabilités, Monty Hall, paradoxe, mathématiques">
-    <meta name="author" content="soleil-jaune">
     <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="google-site-verification" content="z0wL_lokLV5vTHG7bRjCuVYFDP-BApOE2QCljagVgvE" />
+    
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         :root { --bg: #fdfcf8; --text: #121212; --accent: #d32f2f; --dim: #888; }
         body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
@@ -41,11 +39,24 @@
 <body>
 
 <div id="home-page">
-    <header class="text-center mb-16">
-        <h1 class="serif text-[8vw] md:text-[6vw] leading-none font-black tracking-tighter uppercase mb-4">
-            Archives<br> <span class="text-accent italic text-[9vw] md:text-[7vw]">du Hasard</span>
-        </h1>
-        <p class="mono text-xs tracking-[0.4em] text-dim uppercase">Equation du Chaos • Manuscrit complet</p>
+    <header class="flex justify-between items-center w-full max-w-6xl mb-12 px-4 md:px-10">
+        
+        <div onclick="openTab('tabA')" class="menu-card">
+            <div class="text-accent text-xl italic serif">A</div>
+            <div class="serif text-xl font-bold">Jeu Alpha</div>
+        </div>
+
+        <div class="text-center mx-4">
+            <h1 class="serif text-[7vw] md:text-[5vw] leading-none font-black tracking-tighter uppercase mb-4">
+                Archives<br> <span class="text-accent italic text-[8vw] md:text-[6vw]">du Hasard</span>
+            </h1>
+            <p class="mono text-[10px] tracking-[0.3em] text-dim uppercase">Equation du chaos • Manuscrit complet</p>
+        </div>
+
+        <div onclick="openTab('tabB')" class="menu-card">
+            <div class="text-accent text-xl italic serif">B</div>
+            <div class="serif text-xl font-bold">Jeu Beta</div>
+        </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4 w-full max-w-7xl">
@@ -71,8 +82,52 @@
         </div>
     </div>
 </div>
+</div>
 
+<div id="tabA" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour au menu</div>
+    <div class="max-w-2xl mx-auto text-center">
+        <h1 class="serif text-6xl italic font-black mb-4">Anti-Pascal</h1>
+        <div id="a-level-display" class="mono text-accent text-sm mb-8 uppercase tracking-widest">Niveau 1 : La Genèse</div>
+        <div class="border-2 border-black p-8 bg-white relative overflow-hidden">
+            <div id="a-balance-bar" style="width: 50%; height: 10px; background: #d32f2f; margin: 20px auto; transition: 0.1s;"></div>
+            <div id="a-game-zone" class="py-10">
+                <p id="a-instruction" class="serif text-2xl mb-8">Maintenez l'équilibre.</p>
+                <div class="flex gap-4 justify-center">
+                    <button onclick="aGame.action('low')" class="border border-black p-4 hover:bg-black hover:text-white transition mono text-xs">STABILISER (-)</button>
+                    <button onclick="aGame.action('high')" class="border border-black p-4 hover:bg-black hover:text-white transition mono text-xs">STABILISER (+)</button>
+                </div>
+            </div>
+            <div id="a-log" class="mt-8 mono text-[9px] text-dim h-12 overflow-hidden italic">Initialisation...</div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mt-8">
+            <div class="border border-black p-4"><div class="mono text-[10px]">SCORE</div><div id="a-score" class="serif text-2xl">0</div></div>
+            <div class="border border-black p-4"><div class="mono text-[10px]">ENTROPIE</div><div id="a-entropy" class="serif text-2xl">10%</div></div>
+            <div class="border border-black p-4"><div class="mono text-[10px]">RECORD</div><div id="a-best" class="serif text-2xl">0</div></div>
+        </div>
+    </div>
+</div>
 
+<div id="tabB" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour au menu</div>
+    <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="serif text-6xl font-black uppercase">Bernoulli</h1>
+            <p class="mono text-xs text-dim">Séquence d'archive n°<span id="b-seq-num">1</span></p>
+        </div>
+        <div class="border border-black p-12 bg-white text-center">
+            <div id="b-display" class="serif text-5xl mb-12 min-h-[60px] tracking-widest text-accent">---</div>
+            <div id="b-controls" class="flex gap-8 justify-center hidden">
+                <button onclick="bGame.input(0)" class="w-20 h-20 border-2 border-black rounded-full hover:bg-black hover:text-white transition serif text-xl">P</button>
+                <button onclick="bGame.input(1)" class="w-20 h-20 border-2 border-black rounded-full hover:bg-black hover:text-white transition serif text-xl">F</button>
+            </div>
+            <button id="b-start" onclick="bGame.playSequence()" class="border border-black px-10 py-4 mono text-xs font-bold hover:bg-black hover:text-white">DÉCODER</button>
+        </div>
+        <div class="mt-12 mono text-[10px] leading-relaxed border-l-2 border-accent pl-6">
+            <p id="b-story">Le hasard est un ordre qui nous échappe.</p>
+        </div>
+    </div>
+</div>
 <div id="monty" class="content-section">
     <div class="btn-retour" onclick="goHome()">← Retour au menu</div>
     <h1 class="text-7xl serif italic font-black mb-10">Pourquoi est-il <span class="text-accent">vital</span> de changer de porte ?</h1>
@@ -232,6 +287,8 @@
         
         // Initialiser le jeu Monty Hall si c'est cet onglet
         if(id === 'monty' && typeof mGame !== 'undefined') mGame.init();
+		if(id === 'tabA') aGame.init();
+        if(id === 'tabB') bGame.reset();
     }
 
     function goHome() {
@@ -240,7 +297,75 @@
         document.getElementById('home-page').style.display = 'flex';
         window.scrollTo(0,0);
     }
+    // --- LOGIQUE JEU A (ANTI-PASCAL) ---
+    const aGame = {
+        balance: 50, score: 0, level: 1, entropy: 10, active: false, best: 0,
+        init() {
+            this.balance = 50; this.score = 0; this.level = 1; this.entropy = 10;
+            this.active = true; this.updateUI(); this.loop();
+        },
+        updateUI() {
+            document.getElementById('a-balance-bar').style.width = this.balance + "%";
+            document.getElementById('a-score').innerText = this.score;
+            document.getElementById('a-entropy').innerText = Math.floor(this.entropy) + "%";
+            document.getElementById('a-level-display').innerText = `Niveau ${this.level}`;
+        },
+        action(type) {
+            if(!this.active) return;
+            this.balance += (type === 'low' ? -7 : 7);
+            this.score += 10;
+            if(this.score % 150 === 0) { this.level++; this.entropy += 5; }
+            this.updateUI();
+        },
+        loop() {
+            if(!this.active) return;
+            this.balance += (Math.random() - 0.5) * (this.level * 2.5);
+            if(this.balance <= 0 || this.balance >= 100) { this.gameOver(); }
+            else { this.updateUI(); setTimeout(() => this.loop(), 50); }
+        },
+        gameOver() {
+            this.active = false;
+            if(this.score > this.best) this.best = this.score;
+            document.getElementById('a-best').innerText = this.best;
+            alert("Équilibre rompu ! Score : " + this.score);
+            this.init();
+        }
+    };
 
+    // --- LOGIQUE JEU B (BERNOULLI) ---
+    const bGame = {
+        sequence: [], playerSeq: [], level: 1,
+        playSequence() {
+            this.playerSeq = []; this.sequence = [];
+            for(let i=0; i < this.level + 2; i++) this.sequence.push(Math.floor(Math.random() * 2));
+            document.getElementById('b-start').classList.add('hidden');
+            this.show(0);
+        },
+        show(idx) {
+            const d = document.getElementById('b-display');
+            if(idx < this.sequence.length) {
+                d.innerText = this.sequence[idx] === 0 ? "PILE" : "FACE";
+                setTimeout(() => { d.innerText = ""; setTimeout(() => this.show(idx+1), 150); }, 600);
+            } else {
+                d.innerText = "?";
+                document.getElementById('b-controls').classList.remove('hidden');
+            }
+        },
+        input(v) {
+            this.playerSeq.push(v);
+            if(this.playerSeq[this.playerSeq.length-1] !== this.sequence[this.playerSeq.length-1]) {
+                alert("Erreur de séquence !"); this.level = 1; this.reset();
+            } else if(this.playerSeq.length === this.sequence.length) {
+                this.level++; document.getElementById('b-seq-num').innerText = this.level;
+                this.reset();
+            }
+        },
+        reset() {
+            document.getElementById('b-controls').classList.add('hidden');
+            document.getElementById('b-start').classList.remove('hidden');
+            document.getElementById('b-display').innerText = "---";
+        }
+    };
     const mGame = {
         car: 0, pickIdx: null, revealedIdx: null,
         init() {
