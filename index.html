@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHIVES DU HASARD : MANUSCRIT COMPLET</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=JetBrains+Mono:wght@300;500;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root { --bg: #fdfcf8; --text: #121212; --accent: #d32f2f; --dim: #888; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .content-section { display: none; padding: 5vw; max-width: 1000px; margin: 0 auto; min-height: 100vh; }
+        .content-section.active { display: block; }
+
+        .math-block { background: #1a1a1a; color: #eee; padding: 2.5rem; margin: 2rem 0; border-radius: 2px; font-family: 'serif'; line-height: 2; overflow-x: auto; }
+        .logic-card { border-left: 2px solid var(--accent); padding-left: 2rem; margin: 3rem 0; }
+        
+        .box-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+        .box { border: 1px solid var(--text); aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: 0.4s; background: white; }
+        .box.revealed { opacity: 0.2; pointer-events: none; }
+        .box.selected { border: 4px solid var(--accent); }
+
+        .quote { font-family: 'Playfair Display'; font-style: italic; font-size: 1.8rem; text-align: center; margin: 4rem 0; color: var(--accent); border-top: 1px solid #eee; padding-top: 2rem; }
+
+        #home-page { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; }
+        .menu-card { border: 1px solid var(--text); padding: 2.5rem; cursor: pointer; transition: 0.4s; text-align: center; background: white; }
+        .menu-card:hover { background: var(--text); color: var(--bg); }
+        .btn-retour { display: inline-block; margin-bottom: 2rem; font-family: 'JetBrains Mono'; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; border: 1px solid #ccc; padding: 10px 20px; cursor: pointer; transition: 0.3s; }
+        .btn-retour:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+    </style>
+</head>
+<body>
+
+<div id="home-page">
+    <header class="flex flex-col md:flex-row justify-between items-center w-full max-w-6xl mb-12 px-4 gap-8">
+        <div onclick="openTab('tabA')" class="menu-card w-full md:w-40">
+            <div class="text-accent text-xl italic serif">A</div>
+            <div class="serif text-xl font-bold">Anti-Pascal</div>
+        </div>
+
+        <div class="text-center mx-4">
+            <h1 class="serif text-[10vw] md:text-[5vw] leading-none font-black tracking-tighter uppercase mb-4">
+                Archives<br> <span class="text-accent italic text-[12vw] md:text-[6vw]">du Hasard</span>
+            </h1>
+            <p class="mono text-[10px] tracking-[0.3em] text-dim uppercase">Equation du chaos • Manuscrit complet</p>
+        </div>
+
+        <div onclick="openTab('tabB')" class="menu-card w-full md:w-40">
+            <div class="text-accent text-xl italic serif">B</div>
+            <div class="serif text-xl font-bold">Bernoulli</div>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 w-full max-w-7xl">
+        <div onclick="openTab('monty')" class="menu-card"><div class="text-accent mb-4 text-3xl italic serif">01</div><h3 class="serif text-xl font-bold">Monty Hall</h3></div>
+        <div onclick="openTab('birthday')" class="menu-card"><div class="text-accent mb-4 text-3xl italic serif">02</div><h3 class="serif text-xl font-bold">Anniversaires</h3></div>
+        <div onclick="openTab('gambler')" class="menu-card"><div class="text-accent mb-4 text-3xl italic serif">03</div><h3 class="serif text-xl font-bold">Le Parieur</h3></div>
+        <div onclick="openTab('simpson')" class="menu-card"><div class="text-accent mb-4 text-3xl italic serif">04</div><h3 class="serif text-xl font-bold">Simpson</h3></div>
+        <div onclick="openTab('st-petersburg')" class="menu-card"><div class="text-accent mb-4 text-3xl italic serif">05</div><h3 class="serif text-xl font-bold">Pétersbourg</h3></div>
+    </div>
+</div>
+
+<div id="tabA" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <div class="max-w-2xl mx-auto text-center">
+        <h1 class="serif text-6xl italic font-black mb-4">Anti-Pascal</h1>
+        <div id="a-level-display" class="mono text-accent text-sm mb-8 uppercase tracking-widest">Niveau 1</div>
+        <div class="border-2 border-black p-8 bg-white relative">
+            <div id="a-balance-bar" style="width: 50%; height: 10px; background: #d32f2f; margin: 20px auto; transition: 0.1s;"></div>
+            <div class="py-10">
+                <p class="serif text-2xl mb-8">Maintenez l'équilibre.</p>
+                <div class="flex gap-4 justify-center">
+                    <button onmousedown="aGame.action('low')" class="border border-black p-4 hover:bg-black hover:text-white transition mono text-xs">STABILISER (-)</button>
+                    <button onmousedown="aGame.action('high')" class="border border-black p-4 hover:bg-black hover:text-white transition mono text-xs">STABILISER (+)</button>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mt-8">
+            <div class="border border-black p-4"><div class="mono text-[10px]">SCORE</div><div id="a-score" class="serif text-2xl">0</div></div>
+            <div class="border border-black p-4"><div class="mono text-[10px]">ENTROPIE</div><div id="a-entropy" class="serif text-2xl">10%</div></div>
+            <div class="border border-black p-4"><div class="mono text-[10px]">RECORD</div><div id="a-best" class="serif text-2xl">0</div></div>
+        </div>
+    </div>
+</div>
+
+<div id="tabB" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="serif text-6xl font-black uppercase">Bernoulli</h1>
+            <p class="mono text-xs text-dim">Séquence n°<span id="b-seq-num">1</span></p>
+        </div>
+        <div class="border border-black p-12 bg-white text-center">
+            <div id="b-display" class="serif text-5xl mb-12 min-h-[60px] tracking-widest text-accent">---</div>
+            <div id="b-controls" class="flex gap-8 justify-center hidden">
+                <button onclick="bGame.input(0)" class="w-20 h-20 border-2 border-black rounded-full hover:bg-black hover:text-white transition serif text-xl">P</button>
+                <button onclick="bGame.input(1)" class="w-20 h-20 border-2 border-black rounded-full hover:bg-black hover:text-white transition serif text-xl">F</button>
+            </div>
+            <button id="b-start" onclick="bGame.playSequence()" class="border border-black px-10 py-4 mono text-xs font-bold hover:bg-black hover:text-white">DÉCODER</button>
+        </div>
+    </div>
+</div>
+
+<div id="monty" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <h1 class="text-5xl md:text-7xl serif italic font-black mb-10">Pourquoi changer de porte ?</h1>
+    <div class="logic-card">
+        <p>Monty concentre les 66% de chances des portes non choisies sur l'unique porte restante.</p>
+    </div>
+    <div class="box-grid max-w-lg mx-auto">
+        <div id="m-0" class="box" onclick="mGame.pick(0)"><span class="mono text-[10px]">ALPHA</span><span class="serif text-3xl">1</span></div>
+        <div id="m-1" class="box" onclick="mGame.pick(1)"><span class="mono text-[10px]">BETA</span><span class="serif text-3xl">2</span></div>
+        <div id="m-2" class="box" onclick="mGame.pick(2)"><span class="mono text-[10px]">GAMMA</span><span class="serif text-3xl">3</span></div>
+    </div>
+    <div id="m-status" class="mt-8 mono text-xs uppercase tracking-widest text-center">Choisissez une porte.</div>
+    <div id="m-controls" class="hidden flex gap-4 mt-6 max-w-lg mx-auto">
+        <button onclick="mGame.resolve(true)" class="flex-1 border border-black p-4 hover:bg-black hover:text-white transition mono text-[10px]">CHANGER (66%)</button>
+        <button onclick="mGame.resolve(false)" class="flex-1 border border-black p-4 hover:bg-red-700 hover:text-white transition mono text-[10px]">GARDER (33%)</button>
+    </div>
+</div>
+
+<div id="birthday" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <h1 class="text-7xl serif font-black mb-10">Paradoxe des Anniversaires</h1>
+    <div class="logic-card">
+        <p class="text-8xl font-black text-accent mb-4">23</p>
+        <p class="mono text-xs uppercase">C'est le nombre de personnes pour atteindre 50% de probabilité.</p>
+    </div>
+    <div class="math-block">
+        $$P(A) = 1 - \frac{365!}{365^n (365-n)!}$$
+    </div>
+</div>
+
+<div id="gambler" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <h1 class="text-7xl serif font-black mb-10">L'Erreur du Parieur</h1>
+    <p class="text-2xl serif mb-10">La pièce n'a pas de mémoire.</p>
+    <div class="math-block text-center text-3xl">
+        \(P(X_{n+1} = F | \text{Suites de P}) = 0.5\)
+    </div>
+</div>
+
+<div id="simpson" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <h1 class="text-7xl serif font-black mb-10">Paradoxe de Simpson</h1>
+    <p class="text-lg mb-10">Une tendance observée dans plusieurs groupes peut s'inverser lorsque les groupes sont combinés.</p>
+    <div class="math-block">
+        $$\frac{a}{b} < \frac{A}{B} \text{ et } \frac{c}{d} < \frac{C}{D} \implies \frac{a+c}{b+d} > \frac{A+C}{B+D}$$
+    </div>
+</div>
+
+<div id="st-petersburg" class="content-section">
+    <div class="btn-retour" onclick="goHome()">← Retour</div>
+    <h1 class="text-7xl serif font-black mb-10">Pétersbourg</h1>
+    <p class="text-lg mb-10">L'espérance est infinie, mais personne ne paie cher pour jouer : l'utilité de l'argent est logarithmique.</p>
+    <div class="math-block">
+        $$E = \sum_{n=1}^{\infty} (\frac{1}{2})^n \cdot 2^n = 1 + 1 + 1 \dots = \infty$$
+    </div>
+</div>
+
+<script>
+    let currentTimer = null;
+
+    function openTab(id) {
+        stopAllGames();
+        document.getElementById('home-page').style.display = 'none';
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(id);
+        if(target) target.classList.add('active');
+        window.scrollTo(0,0);
+        
+        if(id === 'monty') mGame.init();
+        if(id === 'tabA') aGame.init();
+    }
+
+    function goHome() {
+        stopAllGames();
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('home-page').style.display = 'flex';
+    }
+
+    function stopAllGames() {
+        aGame.active = false;
+        if(currentTimer) clearTimeout(currentTimer);
+        document.getElementById('b-controls').classList.add('hidden');
+    }
+
+    const aGame = {
+        balance: 50, score: 0, level: 1, entropy: 10, active: false, best: 0,
+        init() {
+            this.balance = 50; this.score = 0; this.level = 1; this.entropy = 10;
+            this.active = true; this.updateUI(); this.loop();
+        },
+        updateUI() {
+            const bar = document.getElementById('a-balance-bar');
+            if(bar) bar.style.width = this.balance + "%";
+            document.getElementById('a-score').innerText = this.score;
+            document.getElementById('a-entropy').innerText = Math.floor(this.entropy) + "%";
+            document.getElementById('a-level-display').innerText = `Niveau ${this.level}`;
+        },
+        action(type) {
+            if(!this.active) return;
+            this.balance += (type === 'low' ? -7 : 7);
+            this.score += 10;
+            if(this.score % 150 === 0) { this.level++; this.entropy += 5; }
+            this.updateUI();
+        },
+        loop() {
+            if(!this.active) return;
+            this.balance += (Math.random() - 0.5) * (this.level * 2.5);
+            if(this.balance <= 0 || this.balance >= 100) {
+                alert("Équilibre rompu ! Score : " + this.score);
+                if(this.score > this.best) this.best = this.score;
+                document.getElementById('a-best').innerText = this.best;
+                this.init();
+            } else {
+                this.updateUI();
+                currentTimer = setTimeout(() => this.loop(), 50);
+            }
+        }
+    };
+
+    const bGame = {
+        sequence: [], playerSeq: [], level: 1,
+        playSequence() {
+            this.playerSeq = []; this.sequence = [];
+            for(let i=0; i < this.level + 2; i++) this.sequence.push(Math.floor(Math.random() * 2));
+            document.getElementById('b-start').classList.add('hidden');
+            this.show(0);
+        },
+        show(idx) {
+            const d = document.getElementById('b-display');
+            if(idx < this.sequence.length) {
+                d.innerText = this.sequence[idx] === 0 ? "PILE" : "FACE";
+                currentTimer = setTimeout(() => { 
+                    d.innerText = ""; 
+                    currentTimer = setTimeout(() => this.show(idx+1), 150); 
+                }, 600);
+            } else {
+                d.innerText = "?";
+                document.getElementById('b-controls').classList.remove('hidden');
+            }
+        },
+        input(v) {
+            this.playerSeq.push(v);
+            if(this.playerSeq[this.playerSeq.length-1] !== this.sequence[this.playerSeq.length-1]) {
+                alert("Erreur !"); this.level = 1; this.reset();
+            } else if(this.playerSeq.length === this.sequence.length) {
+                this.level++; document.getElementById('b-seq-num').innerText = this.level;
+                this.reset();
+            }
+        },
+        reset() {
+            document.getElementById('b-controls').classList.add('hidden');
+            document.getElementById('b-start').classList.remove('hidden');
+            document.getElementById('b-display').innerText = "---";
+        }
+    };
+
+    const mGame = {
+        car: 0, pickIdx: null, revealedIdx: null,
+        init() {
+            this.car = Math.floor(Math.random() * 3);
+            this.pickIdx = null;
+            document.querySelectorAll('.box').forEach(b => {
+                b.classList.remove('selected', 'revealed');
+                b.style.background = "white";
+            });
+            document.getElementById('m-status').innerText = "CHOISISSEZ UNE PORTE.";
+            document.getElementById('m-controls').classList.add('hidden');
+        },
+        pick(idx) {
+            if(this.pickIdx !== null) return;
+            this.pickIdx = idx;
+            document.getElementById(`m-${idx}`).classList.add('selected');
+            let goatDoors = [0, 1, 2].filter(i => i !== this.car && i !== this.pickIdx);
+            this.revealedIdx = goatDoors[Math.floor(Math.random() * goatDoors.length)];
+            setTimeout(() => {
+                document.getElementById(`m-${this.revealedIdx}`).classList.add('revealed');
+                document.getElementById('m-status').innerText = `LA PORTE ${this.revealedIdx + 1} EST VIDE.`;
+                document.getElementById('m-controls').classList.remove('hidden');
+            }, 500);
+        },
+        resolve(didChange) {
+            let finalIdx = didChange ? [0, 1, 2].find(i => i !== this.pickIdx && i !== this.revealedIdx) : this.pickIdx;
+            const win = finalIdx === this.car;
+            document.getElementById('m-status').innerHTML = win ? "<span class='text-green-600'>GAGNÉ</span>" : "<span class='text-red-600'>PERDU</span>";
+            document.getElementById(`m-${this.car}`).style.background = "#d4edda";
+            document.getElementById('m-controls').classList.add('hidden');
+            setTimeout(() => this.init(), 3000);
+        }
+    };
+</script>
+</body>
+</html>
